@@ -75,7 +75,7 @@ var IMaskComponent = {
           maskRef.value.updateOptions(_maskOptions);
 
           if ('value' in newval && (newval.value !== _maskValue() || typeof newval.value !== 'string' && maskRef.value.value === '' && !maskRef.value.el.isActive)) {
-            _updateValue();
+            _updateValue(newval.value);
           }
         } else {
           _initMask(_maskOptions);
@@ -112,8 +112,8 @@ var IMaskComponent = {
       if (unmask.value) return maskRef.value.unmaskedValue;
       return maskRef.value.value;
     };
-    const _updateValue = () => {
-      let _value = (propsvalue.value == null || propsvalue.value == undefined)? '' : propsvalue.value;
+    const _updateValue = (v) => {
+      let _value = v || ((propsvalue.value == null || propsvalue.value == undefined)? '' : propsvalue.value);
       if (unmask.value === 'typed') 
         maskRef.value.typedValue = _value;
       else if (unmask.value) 
